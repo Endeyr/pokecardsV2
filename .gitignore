@@ -1,3 +1,4 @@
 .env
 sent_emails
 to-do.md
+node_modules
