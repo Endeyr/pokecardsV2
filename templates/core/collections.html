@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+<!-- prettier-ignore -->
+{% load static %}
+{% block title %} Collections {% endblock title %}
+{% block content %}
+<section class="p-6 my-12 scroll-mt-20 section-min-height">
+	<h2 class="text-4xl font-bold text-center sm:text-5xl mb-6">
+		Collection List
+	</h2>
+	<div>
+		{% for object in page_obj %}
+		<div>
+			<a href="{% url 'core:collection' slug=object.slug %}"
+				>{{object.title}}</a
+			>
+			<p>Date Created: {{object.created}}</p>
+			<p>Num of Cards: {{object.cards.all.count}}</p>
+		</div>
+		{% endfor %}
+	</div>
+	<a href="{% url 'core:create_collection'%}">Add Collection</a>
+</section>
+{% endblock content %}

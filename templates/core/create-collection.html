@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+<!-- prettier-ignore -->
+{% load static %}
+{% block title %} Create Collection {% endblock title %}
+{% block content %}
+<section 
+        class="p-6 my-12 scroll-mt-16 section-min-height ">
+	{% if message %}
+	<p class="bg-danger w-1/4 text-center font-extrabold">{{ message }}</p>
+	{% endif %}
+<h2 class="text-4xl font-bold text-center sm:text-5xl mb-6">Create Collection</h2>
+<form method="POST" action="{% url "core:create_collection"%}" class="max-w-4xl mx-auto text-2xl sm:text-3xl flex flex-col items-left gap-4">
+	{% csrf_token %} {{form.as_p}}
+	<button type="submit" value="create_collection" class="bg-secondary hover:bg-blue-800 active:bg-blue-300 text-white p-3 w-48 rounded-xl border border-solid border-slate-900 dark:border-none">Submit</button>
+</form>
+</section>
+{% endblock content %}

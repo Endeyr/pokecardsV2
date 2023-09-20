@@ -1,0 +1,43 @@
+{% extends 'base/base.html'%} {% block title %} Login {% endblock title %}
+<!-- prettier-ignore -->
+{% block content %}
+<section 
+        class="p-6 my-12 scroll-mt-16 section-min-height ">
+	{% if messages %}
+	<ul class="messages">
+		{% for message in messages %}
+		<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	<article>
+	<h2 class="text-4xl font-bold text-center sm:text-5xl mb-6">Login</h2>
+	<form
+		action="{% url 'users:login' %}"
+		method="post"
+		class="max-w-4xl mx-auto text-2xl sm:text-3xl flex flex-col items-left gap-4"
+	>
+		{% csrf_token %}
+		{{form.as_p}}
+			<button
+				type="submit"
+				value="Login"
+				class="bg-secondary hover:bg-blue-800 active:bg-blue-300 text-white p-3 w-48 rounded-xl border border-solid border-slate-900 dark:border-none"
+			>
+				Submit
+			</button>
+	</form>
+	</article>
+	<article class="mt-8 flex flex-col justify-between gap-4">
+		<div>
+		Need have an account?
+		<a
+			href="{% url 'users:register' %}"
+			class="text-secondary hover:text-blue-800 active:text-blue-300"
+			>Register here</a
+		></div>
+	<div>
+  <a href="{% url 'users:password_reset' %}" class="text-secondary hover:text-blue-800 active:text-blue-300 ">Lost password?</a></div>
+	</article>
+</section>
+{% endblock content %}

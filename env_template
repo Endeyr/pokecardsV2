@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+export DEGUB=1 # change to 0 outside of dev
+export PRODUCTION=0 # change to 1 in prod
+export SECRET_KEY='Add yours here from https://djecrety.ir/'
+export DJANGO_ALLOWED_HOSTS=* localhost 127.0.0.1 [::1]
+export EMAIL_NAME = ""
+export EMAIL_PASS = ""

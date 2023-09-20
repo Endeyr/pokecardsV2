@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+<!-- prettier-ignore -->
+{% load static %}
+{% block title %} Collection {% endblock title %}
+{% block content %}
+<section class="p-6 my-12 scroll-mt-20 section-min-height">
+	<h2 class="text-4xl font-bold text-center sm:text-5xl mb-6">
+		{{collection.title}}
+	</h2>
+	<div>
+		{% for card in collection.cards.all %}
+		<img src="{{card.small_image}}" alt="{{card.name}}" />
+		{% endfor %}
+	</div>
+</section>
+{% endblock content %}

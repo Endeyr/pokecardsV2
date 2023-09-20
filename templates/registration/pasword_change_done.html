@@ -1,0 +1,17 @@
+{% extends 'base/base.html'%}
+<!-- prettier-ignore -->
+{% block title %} Password Change 
+{% endblock title %}
+{% block content %}
+<section class="p-6 my-12 scroll-mt-16 section-min-height">
+	{% if messages %}
+	<ul class="messages">
+		{% for message in messages %}
+		<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	<h2 class="text-4xl font-bold text-center sm:text-5xl mb-6">Change Password</h2>
+<p class="max-w-md text-2xl mt-4 text-center sm:text-left ">You're password has been changed!</p>
+</section>
+{% endblock %}

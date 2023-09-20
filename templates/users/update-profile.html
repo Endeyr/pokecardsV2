@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %} {% block title %} Edit Profile 
+{% endblock title %}
+{% block content %}
+<section class="p-6 my-12 scroll-mt-16 section-min-height">
+	{% if messages %}
+		<ul class="messages">
+			{% for message in messages %}
+			<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+	<h2 class="text-4xl font-bold text-center sm:text-5xl mb-6">Update Profile</h2>
+	<form method="POST" enctype="multipart/form-data" action={% url "users:update_profile" pk=request.user.profile.id %} class="max-w-4xl mx-auto text-2xl sm:text-3xl flex flex-col items-left gap-4">
+		{% csrf_token %} {{form.as_p}}
+		<button type="submit" value="Submit"
+				class="bg-secondary hover:bg-blue-800 active:bg-blue-300 text-white p-3 w-48 rounded-xl border border-solid border-slate-900 dark:border-none">Update Profile</button>
+	</form>
+	<div class="mt-8">
+	<a href="{% url "users:password_change" %}" class="text-secondary hover:text-blue-700 active:text-blue-300">Change Password</a>
+	</div>
+</section>
+{% endblock content %}

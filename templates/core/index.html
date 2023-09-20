@@ -1,0 +1,64 @@
+{% extends 'base/base.html' %} {% load static %}
+<!-- prettier-ignore -->
+{% block title %} Home
+{% endblock title %} {% block content %}
+<div>
+	{% if messages %}
+	<ul class="messages">
+		{% for message in messages %}
+		<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+</div>
+<section 
+        class="p-6 my-12 scroll-mt-40 section-min-height ">
+		<img
+			width="auto"
+			height="auto"
+			src="{% static 'assets/images/pikachu.png' %}"
+			alt="pikachu"
+			class="m-1 p-0.25 h-64"
+		/>
+		<div class="flex flex-col justify-center items-center gap-2">
+			<h1 class="text-2xl">Welcome to Pokécards!</h1>
+			<p class="text-2xl">A webapp to manage your PokémonTCG collection.</p>
+		</div>
+</section>
+<hr class="mx-auto bg-black dark:bg-white w-1/2" />
+<section class="p-6 my-12 scroll-mt-20 section-min-height">
+		<div>
+			<img
+				width="auto"
+				height="auto"
+				src="{% static 'assets/images/pokeball.png' %}"
+				alt="pokeball"
+				class="m-1 p-0.25 h-64"
+			/>
+		</div>
+		<div class="flex flex-col justify-center items-center gap-2">
+			<h2>Start your collection!</h2>
+			<a
+				href="{% url 'core:create_collection' %}"
+				class="text-white p-2 m-1 rounded-full bg-secondary"
+				>Create Collection</a
+			>
+		</div>
+</section>
+<hr class="mx-auto bg-black dark:bg-white w-1/2" />
+<section class="p-6 my-12 scroll-mt-20 section-min-height">
+		<div class="flex flex-col justify-center items-center gap-2">
+			<form class="flex flex-col justify-center items-center gap-2">
+				<label for="card-search"><a href="{% url "core:search" %}">Search</a> for your favorite card!</label>
+		</div>
+		<div>
+			<img
+				width="auto"
+				height="auto"
+				src="{% static 'assets/images/legendary.png' -%}"
+				alt="legendaries"
+				class="m-1 p-0.25 h-64"
+			/>
+		</div>
+</section>
+{% endblock content %}
