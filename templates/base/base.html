@@ -33,22 +33,12 @@
             ></div>
           </button>
           <nav class="hidden md:block space-x-8 text-xl" aria-label="main">
-						{% if user.is_authenticated %} {% if user.first_name %}
-					<a
-						{% if request.path in "/"%}
-						{% endif %}
-						href="{% url 'users:profile' pk=request.user.profile.id %}
+						{% if user.is_authenticated %}
+					<a href="{% url 'users:profile' pk=request.user.profile.id %}
 					" class="hover:opacity-90"
 						>Profile</a
 					>
-					{% else %}
-					<a
-						href="{% url 'users:profile' pk=request.user.profile.id %}
-					" class="hover:opacity-90"
-						>{{user.username}}</a
-					>
-
-					{% endif %}
+					<a href="{% url 'core:search' %}" class="hover:opacity-90">Search</a>
 					<a href="{% url 'core:collections' %}" class="hover:opacity-90">Collections</a>
 					<a href="{% url 'users:logout' %}" class="hover:opacity-90">Logout</a>
 					{% else %}
@@ -99,7 +89,7 @@
 					Code found on
 					<a
 						class="text-secondary"
-						href="{{my_github}}"
+						href="{{project_github}}"
 						target="_blank"
 						rel="noopener noreferrer"
 						>Github</a

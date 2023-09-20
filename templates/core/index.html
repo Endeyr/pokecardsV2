@@ -11,54 +11,53 @@
 	</ul>
 	{% endif %}
 </div>
-<section 
-        class="p-6 my-12 scroll-mt-40 section-min-height ">
+<section class="p-6 my-12 scroll-mt-40 section-min-height">
+	<article class="mx-auto my-12 flex flex-col sm:flex-row items-center gap-8">
 		<img
 			width="auto"
 			height="auto"
 			src="{% static 'assets/images/pikachu.png' %}"
 			alt="pikachu"
-			class="m-1 p-0.25 h-64"
+			class="mb-6 w-1/2"
 		/>
 		<div class="flex flex-col justify-center items-center gap-2">
-			<h1 class="text-2xl">Welcome to Pokécards!</h1>
-			<p class="text-2xl">A webapp to manage your PokémonTCG collection.</p>
+			<h1 class="text-4xl font-bold text-center sm:text-5xl mb-6">Welcome to Pokécards!</h1>
+			<p class="text-3xl text-center mt-2">A webapp to manage your PokémonTCG collection.</p>
 		</div>
+		</article>
 </section>
 <hr class="mx-auto bg-black dark:bg-white w-1/2" />
 <section class="p-6 my-12 scroll-mt-20 section-min-height">
-		<div>
+		<article class="mx-auto my-12 flex flex-col sm:flex-row items-center gap-8">
 			<img
 				width="auto"
 				height="auto"
 				src="{% static 'assets/images/pokeball.png' %}"
 				alt="pokeball"
-				class="m-1 p-0.25 h-64"
+				class="mb-6 w-1/2"
 			/>
-		</div>
 		<div class="flex flex-col justify-center items-center gap-2">
-			<h2>Start your collection!</h2>
-			<a
+			<h2 class="text-4xl font-bold text-center sm:text-5xl mb-6">Start your <a
 				href="{% url 'core:create_collection' %}"
-				class="text-white p-2 m-1 rounded-full bg-secondary"
-				>Create Collection</a
-			>
+				class="text-secondary hover:text-blue-800 active:text-blue-300"
+				>collection</a
+			>!</h2>
 		</div>
+		</article>
 </section>
 <hr class="mx-auto bg-black dark:bg-white w-1/2" />
 <section class="p-6 my-12 scroll-mt-20 section-min-height">
-		<div class="flex flex-col justify-center items-center gap-2">
-			<form class="flex flex-col justify-center items-center gap-2">
-				<label for="card-search"><a href="{% url "core:search" %}">Search</a> for your favorite card!</label>
-		</div>
-		<div>
+<article class="mx-auto my-12 flex flex-col sm:flex-row items-center gap-8">
 			<img
 				width="auto"
 				height="auto"
 				src="{% static 'assets/images/legendary.png' -%}"
 				alt="legendaries"
-				class="m-1 p-0.25 h-64"
+				class="mb-6 w-1/2"
 			/>
+		<div class="flex flex-col justify-center items-center gap-2">
+				<h2 class="text-4xl font-bold text-center sm:text-5xl mb-6"><a href="{% url "core:search" %}" class="text-secondary hover:text-blue-800 active:text-blue-300">Search</a> for your favorite cards!</h2>
 		</div>
+		</article>
 </section>
 {% endblock content %}

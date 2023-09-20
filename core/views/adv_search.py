@@ -1,7 +1,8 @@
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class AdvSearchView(generic.TemplateView):
+class AdvSearchView(LoginRequiredMixin, generic.TemplateView):
     """
     TemplateView used for our advanced serach page
 
@@ -11,3 +12,4 @@ class AdvSearchView(generic.TemplateView):
     """
 
     template_name = "core/adv-search.html"
+    login_url = "users:login"

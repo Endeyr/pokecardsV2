@@ -7,17 +7,44 @@
 	<h2 class="text-4xl font-bold text-center sm:text-5xl mb-6">
 		Collection List
 	</h2>
-	<div>
-		{% for object in page_obj %}
-		<div>
-			<a href="{% url 'core:collection' slug=object.slug %}"
-				>{{object.title}}</a
-			>
-			<p>Date Created: {{object.created}}</p>
-			<p>Num of Cards: {{object.cards.all.count}}</p>
-		</div>
-		{% endfor %}
-	</div>
-	<a href="{% url 'core:create_collection'%}">Add Collection</a>
+	{% for object in page_obj %}
+	<ul
+		class="list-none mx-auto my-12 flex flex-col sm:flex-row items-center gap-8"
+	>
+		<li
+			class="w-full sm:w-5/6 flex flex-col sm:flex-row sm:gap-4 items-center border border-solid border-slate-900 bg-white py-6 px-2 rounded-3xl shadow-xl"
+		>
+			<img
+				width="auto"
+				height="auto"
+				src="{% static 'assets/images/pikachu.png' %}"
+				alt="pikachu"
+				class="sm:p-6 p-2 w-1/4"
+			/>
+			<div">
+				<h3 class="text-3xl text-center">
+					<a
+						href="{% url 'core:collection' slug=object.slug %}"
+						class="text-secondary hover:text-blue-800 active:text-blue-300"
+						>{{object.title}}</a
+					>
+				</h3>
+				<p class="text-2xl text-center mt-2">
+					Date Created: {{object.created}}
+				</p>
+				<p class="text-2xl text-center mt-2">
+					Number of Cards: {{object.cards.all.count}}
+				</p>
+			</div>
+		</li>
+	</ul>
+	{% endfor %}
+	<h2 class="w-full sm:w-5/6 flex flex-col items-center border border-solid border-slate-900 bg-white py-6 px-2 rounded-3xl shadow-xl">
+		<a
+			href="{% url 'core:create_collection'%}"
+			class="text-secondary hover:text-blue-800 active:text-blue-300"
+			>Create Collection</a
+		>
+	</h2>
 </section>
 {% endblock content %}
