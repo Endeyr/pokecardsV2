@@ -17,7 +17,6 @@ Pokécards is a web application built with Django, Python, and JavaScript. It al
 
 ```
 git clone https://github.com/Endeyr/pokecardsV2.git
-
 ```
 
 2. Change into the project directory:
@@ -58,29 +57,29 @@ Add api key to secrets.py created in step 6
 8. Set up the database:
 
 ```
-python3 manage.py makemigrations
+python manage.py makemigrations
 ```
 
 ```
-python3 manage.py migrate
+python manage.py migrate
 ```
 
 9.  Setup tailwind:
 
 ```
-python3 manage.py tailwind install
+python manage.py tailwind install
 ```
 
 10. Run tailwind:
 
 ```
-python3 manage.py tailwind start
+python manage.py tailwind start
 ```
 
 10. Run the development server:
 
 ```
-python3 manage.py runserver
+python manage.py runserver
 ```
 
 11. Access the application by visiting http://localhost:8000 in your web browser.
