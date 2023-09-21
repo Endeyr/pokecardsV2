@@ -1,0 +1,67 @@
+{% extends 'base/base.html' %}
+<!-- prettier-ignore -->
+{% load static %}
+{% block title %} Contact {% endblock title %}
+{% block content %}
+<section class="p-6 my-12 scroll-mt-20 section-min-height">
+{% if messages %}
+	<ul class="messages">
+		{% for message in messages %}
+		<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	<h2 class="text-4xl font-bold text-center sm:text-5xl mb-6">Contact Me</h2>
+	<article class="flex flex-col gap-4 mx-auto p-4 my-4">
+		<p class="text-2xl mt-2">
+			Email:
+			<a
+				href="{{my_email}}"
+				class="text-secondary hover:text-blue-800 active:text-blue-300"
+				target="_blank"
+				rel="noopener noreferrer"
+				>{{my_email}}</a
+			>
+		</p>
+		<p class="text-2xl mt-2">
+			Github:
+			<a
+				href="{{my_github}}"
+				class="text-secondary hover:text-blue-800 active:text-blue-300"
+				target="_blank"
+				rel="noopener noreferrer"
+				>{{my_github}}</a
+			>
+		</p>
+		<p class="text-2xl mt-2">
+			LinkedIn:
+			<a
+				href="{{my_linkedin}}"
+				class="text-secondary hover:text-blue-800 active:text-blue-300"
+				target="_blank"
+				rel="noopener noreferrer"
+				>{{my_linkedin}}</a
+			>
+		</p>
+		<p class="text-2xl mt-2">
+			Portfolio:
+			<a
+				href="{{my_portfolio}}"
+				class="text-secondary hover:text-blue-800 active:text-blue-300"
+				target="_blank"
+				rel="noopener noreferrer"
+				>{{my_portfolio}}</a
+			>
+		</p>
+	</article>
+	<article>
+		<h2 class="text-4xl font-bold text-center sm:text-5xl mb-6">Contact Form</h2>
+		<form method="POST" action="{% url 'core:contact' %}" class="max-w-4xl mx-auto text-2xl sm:text-3xl flex flex-col items-left gap-4">
+			{% csrf_token %} {{form.as_p}}
+			<button type="submit"
+			value="Contact"
+			class="bg-secondary hover:bg-blue-800 active:bg-blue-300 text-white p-3 w-48 rounded-xl border border-solid border-slate-900 dark:border-none">Submit</button>
+		</form>
+	</article>
+</section>
+{% endblock content %}

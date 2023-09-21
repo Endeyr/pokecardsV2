@@ -16,4 +16,5 @@ urlpatterns = [
     path("collections/", views.CollectionsView.as_view(), name="collections"),
     path("card/<str:slug>/", views.CardView.as_view(), name="card"),
     path("cards/", views.CardsView.as_view(), name="cards"),
+    path("contact/", views.ContactView.as_view(), name="contact"),
 ]

@@ -6,6 +6,7 @@ from core.views.collection import CollectionView
 from core.views.collections import CollectionsView
 from core.views.card import CardView
 from core.views.cards import CardsView
+from core.views.contact import ContactView
 
 __all__ = [
     HomeView,
@@ -15,4 +16,6 @@ __all__ = [
     CollectionsView,
     CardView,
     CardsView,
+    SearchView,
+    ContactView,
 ]

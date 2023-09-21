@@ -11,17 +11,19 @@
 		</ul>
 	{% endif %}
 	<h2 class="text-4xl font-bold text-center sm:text-5xl mb-6">{{user.first_name}}'s Profile</h2>
-	<img src="{{ user.profile.avatar.url}}" alt="user profile picture" width=200px
-		height=200px/>
-	<p class="max-w-md text-2xl mt-4 text-center sm:text-left ">Username: {{user.username}}</p>
-	<p class="max-w-md text-2xl mt-4 text-center sm:text-left ">Email: {{user.email}}</p>
-	<p class="max-w-md text-2xl mt-4 text-center sm:text-left ">First Name: {{user.first_name}}</p>
-	<p class="max-w-md text-2xl mt-4 text-center sm:text-left ">Last Name: {{user.last_name}}</p>
-	<p class="max-w-md text-2xl mt-4 text-center sm:text-left ">Bio: {{user.profile.bio}}</p>
-	
+	<article class="mx-auto my-12 flex flex-col sm:flex-row items-center gap-8">
+	<img width="auto"
+			height="auto" src="{{ user.profile.avatar.url}}" alt="user profile picture" class="mx-auto mb-6 w-1/2"/>
+		<div  class="flex flex-col gap-2">
+	<p class="text-3xl mt-2 flex sm:flex-row flex-col gap-4 items-center"><span class="font-bold">Username:</span>{{user.username}}</p>
+	<p class="text-3xl mt-2 flex sm:flex-row flex-col gap-4 items-center"><span class="font-bold">Email:</span> {{user.email}}</p>
+	<p class="text-3xl mt-2 flex sm:flex-row flex-col gap-4 items-center"><span class="font-bold">First Name:</span> {{user.first_name}}</p>
+	<p class="text-3xl mt-2 flex sm:flex-row flex-col gap-4 items-center"><span class="font-bold">Last Name:</span> {{user.last_name}}</p>
+	<p class="text-3xl mt-2 flex sm:flex-row flex-col gap-4 items-center"><span class="font-bold">Bio:</span> {{user.profile.bio}}</p>
 	<div class="mt-8">
-	<p><a href="{% url "users:update_profile" pk=request.user.profile.id %}" class="text-secondary hover:text-blue-800 active:text-blue-300">Update Profile</a></p>
-	<p><a href="{% url "users:update_user" pk=request.user.profile.id %}" class="text-secondary hover:text-blue-800 active:text-blue-300">Update User</a></p>
-	
+	<p class="text-3xl mt-2 items-center"><a href="{% url "users:update_profile" pk=request.user.profile.id %}" class="text-secondary hover:text-blue-800 active:text-blue-300">Update Profile</a></p>
+	<p class="text-3xl mt-2 items-center"><a href="{% url "users:update_user" pk=request.user.profile.id %}" class="text-secondary hover:text-blue-800 active:text-blue-300">Update User</a></p>
+	</div>
+	</article>
 </section>
 {% endblock content %}
