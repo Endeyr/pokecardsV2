@@ -5,3 +5,4 @@ export SECRET_KEY='Add yours here from https://djecrety.ir/'
 export DJANGO_ALLOWED_HOSTS=* localhost 127.0.0.1 [::1]
 export EMAIL_NAME = ""
 export EMAIL_PASS = ""
+export POKEMONTCG_IO_API_KEY = ""

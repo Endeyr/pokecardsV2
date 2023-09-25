@@ -11,7 +11,7 @@
 	</ul>
 	{% endif %}
 </div>
-<section class="p-6 my-12 scroll-mt-40 section-min-height">
+<section id="hero" class="p-6 my-12 scroll-mt-40 section-min-height">
 	<article class="mx-auto my-12 flex flex-col sm:flex-row items-center gap-8">
 		<img
 			width="auto"
@@ -27,7 +27,7 @@
 		</article>
 </section>
 <hr class="mx-auto bg-black dark:bg-white w-1/2" />
-<section class="p-6 my-12 scroll-mt-20 section-min-height">
+<section id="collection" class="p-6 my-12 scroll-mt-20 section-min-height">
 		<article class="mx-auto my-12 flex flex-col sm:flex-row items-center gap-8">
 			<img
 				width="auto"
@@ -46,7 +46,7 @@
 		</article>
 </section>
 <hr class="mx-auto bg-black dark:bg-white w-1/2" />
-<section class="p-6 my-12 scroll-mt-20 section-min-height">
+<section id="search" class="p-6 my-12 scroll-mt-20 section-min-height">
 <article class="mx-auto my-12 flex flex-col sm:flex-row items-center gap-8">
 			<img
 				width="auto"
@@ -56,7 +56,8 @@
 				class="mb-6 w-1/2"
 			/>
 		<div class="flex flex-col justify-center items-center gap-2">
-				<h2 class="text-4xl font-bold text-center sm:text-5xl mb-6"><a href="{% url "core:search" %}" class="text-secondary hover:text-blue-800 active:text-blue-300">Search</a> for your favorite cards!</h2>
+				<h2 class="text-4xl font-bold text-center sm:text-5xl mb-6"><a href="{% url 'core:search' %}" class="text-secondary hover:text-blue-800 active:text-blue-300">Discover</a>  your favorite cards!</h2>
+				
 		</div>
 		</article>
 </section>
