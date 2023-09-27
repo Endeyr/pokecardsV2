@@ -6,7 +6,6 @@ app_name = "core"
 urlpatterns = [
     path("", views.HomeView.as_view(), name="home"),
     path("search/", views.SearchView.as_view(), name="search"),
-    path("adv_search/", views.AdvSearchView.as_view(), name="adv_search"),
     path(
         "collection/create/",
         views.CreateCollectionView.as_view(),

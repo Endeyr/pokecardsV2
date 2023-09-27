@@ -80,45 +80,42 @@
 				class="hidden absolute w-[7.5%] z-10 bg-secondary text-white divide-y divide-primary rounded-lg shadow p-2"
 			>
 				<ul aria-labelledby="dropdownViewButton" class="text-sm">
-					<li class="block p-2 hover:bg-gray-600">Name</li>
-					<li class="block p-2 hover:bg-gray-600">Release Date</li>
-					<li class="block p-2 hover:bg-gray-600">Set</li>
-					<li class="block p-2 hover:bg-gray-600">Number</li>
-					<li class="block p-2 hover:bg-gray-600">Rarity</li>
-				</ul>
-			</div>
-		</div>
-		<div class="w-1/6">
-			<button
-				id="dropdownOrderButton"
-				type="button"
-				data-dropdown-toggle="dropdown"
-				class="font-bold bg-secondary text-white hover:bg-gray-600 rounded-lg p-2 text-center inline-flex items-center justify-center w-full"
-			>
-				Order
-				<svg
-					class="w-2.5 h-2.5 ml-2.5"
-					aria-hidden="true"
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 10 6"
-				>
-					<path
-						stroke="currentColor"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="m1 1 4 4 4-4"
-					/>
-				</svg>
-			</button>
-			<div
-				id="order-div"
-				class="hidden absolute w-[7.5%] z-10 bg-secondary text-white divide-y divide-primary rounded-lg shadow p-2"
-			>
-				<ul aria-labelledby="dropdownViewButton" class="text-sm">
-					<li class="block p-2 hover:bg-gray-600">Asc</li>
-					<li class="block p-2 hover:bg-gray-600">Dsc</li>
+					<li id="sort-set" class="block p-2 hover:bg-gray-600 cursor-pointer">
+						Set
+					</li>
+					<li id="sort-name" class="block p-2 hover:bg-gray-600 cursor-pointer">
+						Name
+					</li>
+					<li
+						id="sort-rarity"
+						class="block p-2 hover:bg-gray-600 cursor-pointer"
+					>
+						Rarity
+					</li>
+					<li
+						id="sort-types"
+						class="block p-2 hover:bg-gray-600 cursor-pointer"
+					>
+						Types
+					</li>
+					<li
+						id="sort-supertype"
+						class="block p-2 hover:bg-gray-600 cursor-pointer"
+					>
+						Supertype
+					</li>
+					<li
+						id="sort-subtypes"
+						class="block p-2 hover:bg-gray-600 cursor-pointer"
+					>
+						Subtypes
+					</li>
+					<li
+						id="sort-price"
+						class="block p-2 hover:bg-gray-600 cursor-pointer"
+					>
+						Price
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -128,7 +125,10 @@
 		id="search-table"
 		class="my-8 hidden sm:flex items-center justify-center"
 	>
-		<table class="w-full text-base text-left border border-collapse">
+		<table
+			id="card-table"
+			class="w-full text-base text-left border border-collapse"
+		>
 			<thead id="search-header" class="text-lg uppercase hidden">
 				<tr>
 					<th scope="col" class="p-3">Set</th>

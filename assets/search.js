@@ -13,11 +13,51 @@ const initApp = () => {
 	const viewBtn = document.getElementById('dropdownViewButton')
 	const sortBtn = document.getElementById('dropdownSortButton')
 	const sortDiv = document.getElementById('sort-div')
-	const orderBtn = document.getElementById('dropdownOrderButton')
-	const orderDiv = document.getElementById('order-div')
 	const searchTitle = document.getElementById('search')
 	const submitBtn = document.getElementById('submit-button')
 	const submitForm = document.getElementById('submit-form')
+
+	const sortTable = (sortBy) => {
+		const table = document.getElementById('card-table')
+		let switching = true
+		let rows,
+			i,
+			x,
+			y,
+			shouldSwitch,
+			dir = 'asc',
+			switchCount = 0
+		while (switching) {
+			switching = false
+			rows = table.rows
+			for (i = 1; i < rows.length - 1; i++) {
+				shouldSwitch = false
+				x = rows[i].getElementsByTagName('TD')[sortBy]
+				y = rows[i + 1].getElementsByTagName('TD')[sortBy]
+				if (dir == 'asc') {
+					if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+						shouldSwitch = true
+						break
+					}
+				} else if (dir == 'dsc') {
+					if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+						shouldSwitch = true
+						break
+					}
+				}
+			}
+			if (shouldSwitch) {
+				rows[i].parentNode.insertBefore(rows[i + 1], rows[i])
+				switching = true
+				switchCount++
+			} else {
+				if (switchCount == 0 && dir == 'asc') {
+					dir = 'dsc'
+					switching = true
+				}
+			}
+		}
+	}
 
 	const addToCollection = (e) => {
 		e.preventDefault()
@@ -143,6 +183,7 @@ const initApp = () => {
 					tdPrice.innerHTML = '$0.00'
 				}
 				tdPrice.classList.add(...classArray)
+				tdPrice.classList.add('text-right')
 
 				const tdCollection = document.createElement('td')
 				tr.appendChild(tdCollection)
@@ -178,16 +219,38 @@ const initApp = () => {
 		sortDiv.classList.toggle('hidden')
 	}
 
-	const toggleOrderBtn = () => {
-		orderDiv.classList.toggle('hidden')
-	}
-
 	if (sortBtn) {
 		sortBtn.addEventListener('click', toggleSortBtn)
-	}
 
-	if (orderBtn) {
-		orderBtn.addEventListener('click', toggleOrderBtn)
+		const sortSet = document.getElementById('sort-set')
+		const sortName = document.getElementById('sort-name')
+		const sortRarity = document.getElementById('sort-rarity')
+		const sortTypes = document.getElementById('sort-types')
+		const sortSupertype = document.getElementById('sort-supertype')
+		const sortSubtypes = document.getElementById('sort-subtypes')
+		const sortPrice = document.getElementById('sort-price')
+
+		sortSet.addEventListener('click', function () {
+			sortTable(0)
+		})
+		sortName.addEventListener('click', function () {
+			sortTable(2)
+		})
+		sortRarity.addEventListener('click', function () {
+			sortTable(3)
+		})
+		sortTypes.addEventListener('click', function () {
+			sortTable(4)
+		})
+		sortSupertype.addEventListener('click', function () {
+			sortTable(5)
+		})
+		sortSubtypes.addEventListener('click', function () {
+			sortTable(6)
+		})
+		sortPrice.addEventListener('click', function () {
+			sortTable(7)
+		})
 	}
 
 	// view button functionality
@@ -198,8 +261,10 @@ const initApp = () => {
 		showResultsImage.classList.toggle('sm:grid')
 		if (viewBtn.innerText == 'Table') {
 			viewBtn.innerText = 'Image'
+			sortBtn.classList.toggle('hidden')
 		} else if (viewBtn.innerText == 'Image') {
 			viewBtn.innerText = 'Table'
+			sortBtn.classList.toggle('hidden')
 		}
 	}
 
