@@ -1,5 +1,5 @@
-import pokemon from 'pokemontcgsdk';
-pokemon.configure({ 'api.Key': 'bd895527-41d0-417e-a109-3667e7b8dddb' })
+import pokemon from 'pokemontcgsdk'
+pokemon.configure({ 'api.Key': process.env.POKEMONTCG_API_KEY })
 
 const initApp = () => {
 	const searchBtn = document.getElementById('search-btn')
