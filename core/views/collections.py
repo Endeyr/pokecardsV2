@@ -14,4 +14,6 @@ class CollectionsView(LoginRequiredMixin, generic.ListView):
     login_url = "users:login"
 
     def get_queryset(self):
-        return self.model.objects.active().order_by("-created")
+        user = self.request.user
+        collection = Collection.objects.all().filter(user=user)
+        return collection.active().order_by("-created")
