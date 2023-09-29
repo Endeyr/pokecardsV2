@@ -15,5 +15,5 @@ class CollectionsView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         user = self.request.user
-        collection = Collection.objects.all().filter(user=user)
+        collection = Collection.objects.filter(user=user)
         return collection.active().order_by("-created")
