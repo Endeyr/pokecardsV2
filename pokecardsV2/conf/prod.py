@@ -1,6 +1,6 @@
 from .common import *
 import os
-
+import dj_database_url
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -15,10 +15,10 @@ ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    "default": dj_database_url.config(
+        default="postgresql://postgres:postgres@localhost:5432/pokecardsV2",
+        conn_max_age=600,
+    )
 }
 
 # Static files (CSS, JavaScript, Images)
@@ -35,6 +35,9 @@ MEDIA_URL = "/media/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
 
+# Turn on WhiteNoise storage backend that takes care of compressing static files
+# and creating unique names for each version so they can safely be cached forever.
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
