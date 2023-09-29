@@ -1,5 +1,5 @@
 import pokemon from 'pokemontcgsdk'
-pokemon.configure({ 'api.Key': process.env.POKEMONTCG_API_KEY })
+pokemon.configure({ 'api.Key': 'bd895527-41d0-417e-a109-3667e7b8dddb' })
 
 const initApp = () => {
 	const searchBtn = document.getElementById('search-btn')
@@ -17,6 +17,7 @@ const initApp = () => {
 	const submitBtn = document.getElementById('submit-button')
 	const submitForm = document.getElementById('submit-form')
 	const images = document.querySelectorAll('.images')
+	const collections_div = document.getElementById('collections')
 
 	const imageSelect = (e) => {
 		e.preventDefault()
@@ -291,6 +292,7 @@ const initApp = () => {
 			tableBtn.classList.toggle('sm:hidden')
 			tableBtn.classList.toggle('sm:flex')
 			submitBtn.classList.toggle('hidden')
+			collections_div.classList.toggle('hidden')
 		})
 	}
 	if (searchBtn) {
