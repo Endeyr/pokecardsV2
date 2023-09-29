@@ -16,8 +16,7 @@ ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 DATABASES = {
     "default": dj_database_url.config(
-        # Feel free to alter this value to suit your needs.
-        default="postgresql://postgres:postgres@localhost:5432/pokecardsV2",
+        default=dj_database_url.parse(os.environ.get("DATABASE_URL")),
         conn_max_age=600,
     )
 }
