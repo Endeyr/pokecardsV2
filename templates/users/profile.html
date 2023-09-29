@@ -10,7 +10,11 @@
 			{% endfor %}
 		</ul>
 	{% endif %}
+	{% if user.first_name %}
 	<h2 class="text-4xl font-bold text-center sm:text-5xl mb-6">{{user.first_name}}'s Profile</h2>
+	{% else %}
+<h2 class="text-4xl font-bold text-center sm:text-5xl mb-6">Your Profile</h2>
+	{% endif %}
 	<article class="mx-auto my-12 flex flex-col sm:flex-row items-center gap-8">
 	<img width="auto"
 			height="auto" src="{{ user.profile.avatar.url}}" alt="user profile picture" class="mx-auto mb-6 w-1/2"/>
