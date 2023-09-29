@@ -13,8 +13,9 @@ urlpatterns = [
     ),
     path("collection/<str:slug>/", views.CollectionView.as_view(), name="collection"),
     path("collections/", views.CollectionsView.as_view(), name="collections"),
-    path("card/<str:slug>/", views.CardView.as_view(), name="card"),
+    path("card/<str:id>/", views.CardView.as_view(), name="card"),
     path("cards/", views.CardsView.as_view(), name="cards"),
     path("contact/", views.ContactView.as_view(), name="contact"),
     path("add_card/", views.add_card, name="add_card"),
+    path("remove_card/<str:id>", views.remove_card, name="remove_card"),
 ]

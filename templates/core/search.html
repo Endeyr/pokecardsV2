@@ -7,6 +7,7 @@
 	<h2 id="search" class="text-4xl font-bold text-center sm:text-5xl mb-6">
 		Search
 	</h2>
+
 	<form
 		id="search-form"
 		action="."
@@ -45,7 +46,6 @@
 			<button
 				id="dropdownViewButton"
 				type="button"
-				data-dropdown-toggle="dropdown"
 				class="font-bold bg-secondary text-white hover:bg-gray-600 rounded-lg p-2 text-center inline-flex items-center justify-center w-full"
 			>
 				Image
@@ -55,7 +55,6 @@
 			<button
 				id="dropdownSortButton"
 				type="button"
-				data-dropdown-toggle="dropdown"
 				class="font-bold bg-secondary text-white hover:bg-gray-600 rounded-lg p-2 text-center inline-flex items-center w-full justify-center"
 			>
 				Sort
@@ -79,7 +78,7 @@
 				id="sort-div"
 				class="hidden absolute w-[7.5%] z-10 bg-secondary text-white divide-y divide-primary rounded-lg shadow p-2"
 			>
-				<ul aria-labelledby="dropdownViewButton" class="text-sm">
+				<ul class="text-sm">
 					<li id="sort-set" class="block p-2 hover:bg-gray-600 cursor-pointer">
 						Set
 					</li>
@@ -151,11 +150,26 @@
 	></article>
 	<form
 		id="submit-form"
-		action="{% url 'core:add_card'%}"
+		action="{% url 'core:add_card' %}"
 		method="POST"
 		class="max-w-4xl mx-auto text-2xl sm:text-3xl flex flex-col items-left gap-4"
 	>
 		{% csrf_token %}
+		<div id="collections" class="w-full">
+			<label for="collection" class="block mb-1 text-sm font-medium"
+				>Collection:</label
+			>
+			<select
+				name="collection_id"
+				form="submit-form"
+				id="collection"
+				class="border border-gray-300 text-sm rounded-lg block w-full p-2.5"
+			>
+				{% for collection in collections%}
+				<option value="{{collection.id}}">{{collection.title}}</option>
+				{% endfor %}
+			</select>
+		</div>
 		<button
 			id="submit-button"
 			type="submit"

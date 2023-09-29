@@ -1,0 +1,51 @@
+{% extends 'base/base.html' %}
+<!-- prettier-ignore -->
+{% load static %}
+{% block title %} Card {% endblock title %}
+{% block content %}
+<section class="p-6 my-12 scroll-mt-20 section-min-height">
+	<h2 class="text-4xl font-bold text-center sm:text-5xl mb-6">{{card.name}}</h2>
+	<div class="flex flex-col sm:flex-row">
+		<article class="sm:w-1/2 w-full m-1 p-0.5 sm:m-4 sm:p-4">
+			<img
+				height="auto"
+				width="auto"
+				class="block sm:hidden m-1 p-0.25"
+				src="{{ card.small_image }}"
+				alt="{{ card.name }}"
+				title="{{card.name}}"
+			/>
+			<img
+				height="auto"
+				width="auto"
+				class="hidden sm:block m-1 p-0.25"
+				src="{{ card.large_image }}"
+				alt="{{ card.name }}"
+				title="{{card.name}}"
+			/>
+		</article>
+		<article
+			class="sm:w-1/2 w-full m-1 p-0.5 sm:m-4 sm:p-4 flex flex-col justify-evenly"
+		>
+			<p><span class="font-bold">Set: </span>{{card.set}}</p>
+			<p><span class="font-bold">Num: </span>{{card.number}}</p>
+			<p><span class="font-bold">Id: </span>{{card.id}}</p>
+			<p><span class="font-bold">Rarity: </span>{{card.rarity}}</p>
+			<p><span class="font-bold">Type: </span>{{card.types}}</p>
+			<p><span class="font-bold">Supertype: </span>{{card.supertype}}</p>
+			<p><span class="font-bold">Subtype: </span>{{card.subtypes}}</p>
+			<p><span class="font-bold">HP: </span>{{card.hp}}</p>
+			<p><span class="font-bold">Artist: </span>{{card.artist}}</p>
+			<p><span class="font-bold">Price: </span>${{card.price}}</p>
+		</article>
+	</div>
+	<p class="w-full text-center text-xl">
+		<a
+			href="{% url 'core:collections'  %}"
+			class="text-secondary hover:text-blue-800 active:text-blue-300"
+			>Back</a
+		>
+		to Collections
+	</p>
+</section>
+{% endblock content %}

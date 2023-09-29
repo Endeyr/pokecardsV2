@@ -7,7 +7,7 @@
 	<h2 class="text-4xl font-bold text-center sm:text-5xl mb-6">
 		{{collection.title}}
 	</h2>
-	{% if collection.cards %}
+	{% if collection.cards.all.count > 0 %}
 	<article
 		id="table-button"
 		class="hidden sm:flex justify-center gap-3 my-4 p-0.5"
@@ -114,24 +114,39 @@
 			</thead>
 			<tbody>
 				{% for card in collection.cards.all %}
+
 				<tr>
 					<td class="p-3">{{ card.set }}</td>
 					<td class="p-3">{{ card.number }}</td>
-					<td class="p-3">{{ card.name }}</td>
+					<td class="p-3">
+						<a
+							href="{% url 'core:card' card.id %}"
+							class="cursor-pointer text-secondary"
+							>{{ card.name }}</a
+						>
+					</td>
 					<td class="p-3">{{ card.rarity }}</td>
 					<td class="p-3">{{ card.types }}</td>
 					<td class="p-3">{{ card.supertype }}</td>
 					<td class="p-3">{{ card.subtypes }}</td>
 					<td class="p-3 text-right">${{ card.price }}</td>
 					<td class="p-3">
-						<button
-							type="submit"
-							id="{{card.id}}"
-							value="{{card.id}}"
-							class="text-red-500 active:text-red-700 hover:text-red-300"
-						>
-							Remove
-						</button>
+						<form action="{% url 'core:remove_card' card.id %}" method="post">
+							{% csrf_token %}
+							<input
+								class="hidden"
+								name="collection_id"
+								value="{{collection.id}}"
+							/>
+							<button
+								type="submit"
+								id="{{card.id}}"
+								value="{{card.id}}"
+								class="text-red-500 active:text-red-700 hover:text-red-300"
+							>
+								Remove
+							</button>
+						</form>
 					</td>
 				</tr>
 				{% endfor %}
@@ -143,17 +158,39 @@
 		class="mx-auto my-8 grid grid-cols-1 sm:grid-cols-5 sm:gap-4 sm:hidden items-center justify-center"
 	>
 		{% for card in collection.cards.all %}
-		<img
-			src="{{card.small_image}}"
-			alt="{{card.name}}"
-			width="auto"
-			height="auto"
-			class="mb-6 w-full cursor-pointer"
-		/>
+		<a href="{% url 'core:card' card.id %}">
+			<img
+				src="{{card.small_image}}"
+				alt="{{card.name}}"
+				title="{{card.name}}"
+				id="image_{{card.id}}"
+				width="auto"
+				height="auto"
+				class="mb-6 w-full cursor-pointer hover:border-2 hover:border-solid hover:border-blue-700"
+		/></a>
 		{% endfor %}
 	</article>
 	{% else %}
-	<p>Search for Cards to Add to Your Collection</p>
+	<p class="text-3xl text-center mt-2">
+		<a href="{% url 'core:search'%}" class="text-secondary">Search</a> for Cards
+		to Add to Your Collection
+	</p>
 	{% endif %}
+	<form
+		id="submit-form"
+		action="{% url 'core:add_card'%}"
+		method="POST"
+		class="max-w-4xl mx-auto text-2xl sm:text-3xl flex flex-col items-left gap-4"
+	>
+		{% csrf_token %}
+		<button
+			id="submit-button"
+			type="submit"
+			value="Submit"
+			class="hidden bg-secondary hover:bg-blue-800 active:bg-blue-300 text-white p-3 w-48 rounded-xl border border-solid border-slate-900 dark:border-none"
+		>
+			Submit
+		</button>
+	</form>
 </section>
 {% endblock content %}

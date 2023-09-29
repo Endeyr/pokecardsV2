@@ -16,6 +16,40 @@ const initApp = () => {
 	const searchTitle = document.getElementById('search')
 	const submitBtn = document.getElementById('submit-button')
 	const submitForm = document.getElementById('submit-form')
+	const images = document.querySelectorAll('.images')
+
+	const imageSelect = (e) => {
+		e.preventDefault()
+		const card_id = e.target.id
+		const image = document.getElementById(card_id)
+		image.style.cssText += 'border: 2px solid blue'
+		image.onclick = imageDeselect
+
+		const input = document.createElement('input')
+		input.classList.add('hidden')
+		input.value = card_id.replace('image_', '')
+		input.name = 'card_id'
+		input.id = `card_${card_id}`
+		input.type = 'text'
+		submitForm.insertBefore(input, submitBtn)
+	}
+
+	const imageDeselect = (e) => {
+		e.preventDefault()
+		const card_id = e.target.id
+		const image = document.getElementById(card_id)
+		image.style.cssText += 'border: none'
+		image.onclick = imageSelect
+
+		const input = document.getElementById(`card_${value}`)
+		input.remove()
+	}
+
+	if (images) {
+		images.forEach((item) => {
+			item.onclick = imageSelect
+		})
+	}
 
 	const sortTable = (sortBy) => {
 		const table = document.getElementById('card-table')
@@ -34,15 +68,35 @@ const initApp = () => {
 				shouldSwitch = false
 				x = rows[i].getElementsByTagName('TD')[sortBy]
 				y = rows[i + 1].getElementsByTagName('TD')[sortBy]
-				if (dir == 'asc') {
-					if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-						shouldSwitch = true
-						break
+				if (sortBy == 7) {
+					if (dir == 'asc') {
+						if (
+							parseFloat(x.innerHTML.replace('$', '').replace('NA', '0.00')) >
+							parseFloat(y.innerHTML.replace('$', '').replace('NA', '0.00'))
+						) {
+							shouldSwitch = true
+							break
+						}
+					} else if (dir == 'dsc') {
+						if (
+							parseFloat(x.innerHTML.replace('$', '').replace('NA', '0.00')) <
+							parseFloat(y.innerHTML.replace('$', '').replace('NA', '0.00'))
+						) {
+							shouldSwitch = true
+							break
+						}
 					}
-				} else if (dir == 'dsc') {
-					if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-						shouldSwitch = true
-						break
+				} else {
+					if (dir == 'asc') {
+						if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+							shouldSwitch = true
+							break
+						}
+					} else if (dir == 'dsc') {
+						if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+							shouldSwitch = true
+							break
+						}
 					}
 				}
 			}
@@ -112,9 +166,11 @@ const initApp = () => {
 				showResultsImage.appendChild(img)
 				img.src = result.data[i].images.small
 				img.alt = result.data[i].name
-				img.classList.add('mb-6', 'w-full', 'cursor-pointer')
+				img.id = `image_${result.data[i].id}`
+				img.classList.add('mb-6', 'w-full', 'cursor-pointer', 'images')
 				img.width = 'auto'
 				img.height = 'auto'
+				img.onclick = imageSelect
 
 				// table results
 				const tr = document.createElement('tr')
@@ -157,28 +213,54 @@ const initApp = () => {
 
 				const tdPrice = document.createElement('td')
 				tr.appendChild(tdPrice)
-				if (result.data[i].tcgplayer.prices === undefined) {
+				if (result.data[i].tcgplayer == undefined) {
+					tdPrice.innerHTML = 'NA'
+				} else if (result.data[i].tcgplayer.prices == undefined) {
 					tdPrice.innerHTML = 'NA'
 				} else if (result.data[i].tcgplayer.prices.normal) {
-					tdPrice.innerHTML = `$${result.data[
-						i
-					].tcgplayer.prices.normal.market.toFixed(2)}`
+					if (result.data[i].tcgplayer.prices.normal.market) {
+						tdPrice.innerHTML = `$${result.data[
+							i
+						].tcgplayer.prices.normal.market.toFixed(2)}`
+					} else {
+						;`$${result.data[i].tcgplayer.prices.normal.mid.toFixed(2)}`
+					}
 				} else if (result.data[i].tcgplayer.prices.holofoil) {
-					tdPrice.innerHTML = `$${result.data[
-						i
-					].tcgplayer.prices.holofoil.market.toFixed(2)}`
+					if (result.data[i].tcgplayer.prices.holofoil.market) {
+						tdPrice.innerHTML = `$${result.data[
+							i
+						].tcgplayer.prices.holofoil.market.toFixed(2)}`
+					} else {
+						;`$${result.data[i].tcgplayer.prices.holofoil.mid.toFixed(2)}`
+					}
 				} else if (result.data[i].tcgplayer.prices.reverseHolofoil) {
-					tdPrice.innerHTML = `$${result.data[
-						i
-					].tcgplayer.prices.reverseHolofoil.market.toFixed(2)}`
+					if (result.data[i].tcgplayer.prices.reverseHolofoil.market) {
+						tdPrice.innerHTML = `$${result.data[
+							i
+						].tcgplayer.prices.reverseHolofoil.market.toFixed(2)}`
+					} else {
+						;`$${result.data[i].tcgplayer.prices.reverseHolofoil.mid.toFixed(
+							2
+						)}`
+					}
 				} else if (result.data[i].tcgplayer.prices.unlimited) {
-					tdPrice.innerHTML = `$${result.data[
-						i
-					].tcgplayer.prices.unlimited.market.toFixed(2)}`
+					if (result.data[i].tcgplayer.prices.unlimited.market) {
+						tdPrice.innerHTML = `$${result.data[
+							i
+						].tcgplayer.prices.unlimited.market.toFixed(2)}`
+					} else {
+						;`$${result.data[i].tcgplayer.prices.unlimited.mid.toFixed(2)}`
+					}
 				} else if (result.data[i].tcgplayer.prices.unlimitedHolofoil) {
-					tdPrice.innerHTML = `$${result.data[
-						i
-					].tcgplayer.prices.unlimitedHolofoil.market.toFixed(2)}`
+					if (result.data[i].tcgplayer.prices.unlimitedHolofoil.market) {
+						tdPrice.innerHTML = `$${result.data[
+							i
+						].tcgplayer.prices.unlimitedHolofoil.market.toFixed(2)}`
+					} else {
+						;`$${result.data[i].tcgplayer.prices.unlimitedHolofoil.mid.toFixed(
+							2
+						)}`
+					}
 				} else {
 					tdPrice.innerHTML = '$0.00'
 				}
@@ -215,12 +297,10 @@ const initApp = () => {
 		searchBtn.addEventListener('click', search)
 	}
 
-	const toggleSortBtn = () => {
-		sortDiv.classList.toggle('hidden')
-	}
-
 	if (sortBtn) {
-		sortBtn.addEventListener('click', toggleSortBtn)
+		sortBtn.addEventListener('click', () => {
+			sortDiv.classList.toggle('hidden')
+		})
 
 		const sortSet = document.getElementById('sort-set')
 		const sortName = document.getElementById('sort-name')
@@ -232,24 +312,31 @@ const initApp = () => {
 
 		sortSet.addEventListener('click', function () {
 			sortTable(0)
+			sortDiv.classList.toggle('hidden')
 		})
 		sortName.addEventListener('click', function () {
 			sortTable(2)
+			sortDiv.classList.toggle('hidden')
 		})
 		sortRarity.addEventListener('click', function () {
 			sortTable(3)
+			sortDiv.classList.toggle('hidden')
 		})
 		sortTypes.addEventListener('click', function () {
 			sortTable(4)
+			sortDiv.classList.toggle('hidden')
 		})
 		sortSupertype.addEventListener('click', function () {
 			sortTable(5)
+			sortDiv.classList.toggle('hidden')
 		})
 		sortSubtypes.addEventListener('click', function () {
 			sortTable(6)
+			sortDiv.classList.toggle('hidden')
 		})
 		sortPrice.addEventListener('click', function () {
 			sortTable(7)
+			sortDiv.classList.toggle('hidden')
 		})
 	}
 

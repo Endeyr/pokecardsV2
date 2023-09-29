@@ -5,7 +5,7 @@ from pokemontcgsdk import Card as PokemonCard
 
 def add_card(request):
     if request.method == "POST":
-        collection = Collection.objects.get(user=request.user)
+        collection = Collection.objects.get(id=request.POST.get("collection_id"))
         cards = request.POST.getlist("card_id")
         for card in cards:
             try:

@@ -7,6 +7,7 @@ from core.views.card import CardView
 from core.views.cards import CardsView
 from core.views.contact import ContactView
 from core.views.add_card import add_card
+from core.views.remove_card import remove_card
 
 __all__ = [
     HomeView,
@@ -17,5 +18,6 @@ __all__ = [
     CardsView,
     SearchView,
     ContactView,
+    remove_card,
     add_card,
 ]

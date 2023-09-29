@@ -17,6 +17,7 @@ class CollectionForm(LoginRequiredMixin, forms.ModelForm):
 
     class Meta:
         model = Collection
+        exclude = ["user"]
         fields = (
             "title",
             "description",
