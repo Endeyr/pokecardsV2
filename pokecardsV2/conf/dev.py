@@ -39,3 +39,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = os.path.join(BASE_DIR / "sent_emails")
+
+
+WSGI_APPLICATION = "pokecardsV2.wsgi_dev.application"
