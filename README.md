@@ -42,7 +42,7 @@ source env/bin/activate
 5. Install the required dependencies:
 
 ```
-pip install -r requirements/base.txt
+pip install -r requirements/dev.txt
 ```
 
 6. Set up env:
@@ -116,11 +116,7 @@ This project is not a social media or e-commerce site but built to utilize an ap
 
 These are the important files for the project and their usage:
 
-# management/commands/seed.py
-
-How the user seeds the data to the project. In this file I formatted the api data then saved it to my models.py file. This allowed me to quickly access the database as users search for specific cards. An alternative approach could be using javascript to access the api at each user request but from my research, that process doesn't scale well with larger user bases as you quickly hit the api limit on the free tier. I could improve this process by properly deserializing some of the data before I save it to the database but I was having trouble working with that particular code and process so I opted for a more blunt approach of saving the more complex data into a text area then parsing through that string in the views before passing it to my template.
-
-# templates/main
+# templates/base
 
 The main html for this project. These files handle the front end for searching, creating collections, viewing user profile, navigation, and the base index. I created a html file for each page of functionality and decided to use tailwind to style my components as I wanted a mobile first design pattern. Tailwind ended up being the best choice since it is by design mobile first.
 
@@ -128,24 +124,48 @@ The main html for this project. These files handle the front end for searching, 
 
 The user html for this project. These files handle the front end for user registration and login functionality. I utilized django's builtin user creation and authentication then created these files as the font end. Again I used tailwind along with django's form model.
 
-# forms.py
+# templates/registration
 
-# models.py
+# templates/core
+
+# assets/index.js
+
+# assets/search.js
+
+# core/admin
+
+# core/forms
+
+# core/models
+
+# core/views
+
+# core/urls
 
 # urls.py
 
 # views.py
 
-# static/main.js
+# pokecardsV2/conf
+
+# pokecardsV2/wsgi
+
+# pokecardsV2/context_processor
 
 # theme/static_src/tailwind.config.js
 
-# users/forms.py
+# users/forms
 
-# users/urls.py
+# users/urls
 
-# users/views.py
+# users/views
 
-# requirements.txt
+# users/models
+
+# requirements
+
+# manage.py
+
+# webpack.config.js
 
 ## Additional Information
