@@ -8,6 +8,7 @@ urlpatterns = [
     path("", include("core.urls", namespace="core")),
     path("user/", include("users.urls", namespace="users")),
     path("__reload__/", include("django_browser_reload.urls")),
+    path("__debug__/", include("debug_toolbar.urls")),
 ]
 
 if not settings.PRODUCTION:
@@ -15,7 +16,3 @@ if not settings.PRODUCTION:
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
-if settings.DEBUG:
-    urlpatterns += path("__debug__/", include("debug_toolbar.urls"))

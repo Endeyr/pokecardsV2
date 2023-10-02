@@ -33,8 +33,6 @@ APPS = [
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + APPS
 
-SITE_ID = 1
-
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
