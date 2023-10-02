@@ -118,7 +118,7 @@ These are the important files for the project and their usage:
 
 # templates/base
 
-The main html for this project. These files handle the front end for searching, creating collections, viewing user profile, navigation, and the base index. I created a html file for each page of functionality and decided to use tailwind to style my components as I wanted a mobile first design pattern. Tailwind ended up being the best choice since it is by design mobile first.
+The layout html for this project. This holds the nav header and the footer to display on each page using {% extends %}.
 
 # templates/users
 
@@ -142,15 +142,13 @@ The user html for this project. These files handle the front end for user regist
 
 # core/urls
 
-# urls.py
-
-# views.py
-
 # pokecardsV2/conf
 
 # pokecardsV2/wsgi
 
-# pokecardsV2/context_processor
+# pokecardsV2/context_processor.py
+
+# pokecardsV2/storage_backends.py
 
 # theme/static_src/tailwind.config.js
 

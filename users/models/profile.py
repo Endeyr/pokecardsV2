@@ -12,4 +12,9 @@ class Profile(models.Model):
 
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     bio = models.TextField(max_length=1000, null=True, blank=True, default="")
-    avatar = models.ImageField(default="default.jpg", upload_to="profile_pictures")
+    avatar = models.ImageField(
+        null=True,
+        blank=True,
+        default="default.jpg",
+        upload_to="profile_picture",
+    )

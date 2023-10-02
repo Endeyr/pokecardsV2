@@ -20,8 +20,10 @@ def add_card(request):
                 card_obj.name = card_api.name
                 card_obj.number = card_api.number
 
-                if card_api.tcgplayer.prices is None:
-                    card_obj.price = "NA"
+                if card_api.tcgplayer is None:
+                    card_obj.price = 0.00
+                elif card_api.tcgplayer.prices is None:
+                    card_obj.price = 0.00
                 elif card_api.tcgplayer.prices.normal:
                     card_obj.price = card_api.tcgplayer.prices.normal.market
                 elif card_api.tcgplayer.prices.holofoil:

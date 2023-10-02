@@ -1,6 +1,5 @@
 from .common import *
 import os
-import dj_database_url
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -14,14 +13,15 @@ RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
 DATABASES = {
-    "default": dj_database_url.config(
-        default=dj_database_url.parse(os.environ.get("DATABASE_URL")),
-        conn_max_age=600,
-    )
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "postgresql_pokecards",
+        "USER": "postgresql_pokecards_user",
+        "PASSWORD": "22tUniFq7nNNoCQxl0PqclfXD3DCbRg2",
+        "HOST": "dpg-ckbghuect0pc73dm8smg-a.ohio-postgres.render.com",
+        "PORT": "5432",
+    }
 }
 
 SITE_ID = 2
@@ -33,37 +33,28 @@ if USE_S3:
     AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
     AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
     AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
-    AWS_DEFAULT_ACL = None
+    AWS_DEFAULT_ACL = "public-read"
     AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
     AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
     # s3 static settings
     STATIC_LOCATION = "static"
     STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/"
-    STATICFILES_STORAGE = "hello_django.storage_backends.StaticStorage"
+    STATICFILES_STORAGE = "pokecardsV2.storage_backends.StaticStorage"
     # s3 public media settings
     PUBLIC_MEDIA_LOCATION = "media"
     MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/"
-    DEFAULT_FILE_STORAGE = "hello_django.storage_backends.PublicMediaStorage"
+    DEFAULT_FILE_STORAGE = "pokecardsV2.storage_backends.PublicMediaStorage"
     # s3 private media settings
     PRIVATE_MEDIA_LOCATION = "private"
-    PRIVATE_FILE_STORAGE = "hello_django.storage_backends.PrivateMediaStorage"
+    PRIVATE_FILE_STORAGE = "pokecardsV2.storage_backends.PrivateMediaStorage"
+
+    AWS_S3_HOST = "s3.us-east-2.amazonaws.com"
+    AWS_S3_REGION_NAME = "us-east-2"
 else:
     STATIC_URL = "/staticfiles/"
     STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
     MEDIA_URL = "/mediafiles/"
     MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
-    # Turn on WhiteNoise storage backend that takes care of compressing static files
-    # and creating unique names for each version so they can safely be cached forever.
-    # this was conflicting with STATICFILES_STORAGE
-    STORAGES = {
-        "default": {
-            "BACKEND": "storages.backends.s3.S3Storage",
-            "OPTIONS": {},
-        },
-        "staticfiles": {
-            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-        },
-    }
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
